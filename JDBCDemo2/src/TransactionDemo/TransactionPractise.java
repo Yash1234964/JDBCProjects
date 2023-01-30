@@ -13,6 +13,7 @@ public class TransactionPractise {
 	static Connection connection=null;
 	static Statement statement=null;
 	static ResultSet resultSet=null;
+	static ResultSet rs=null;
 	static Scanner sc=null;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -52,7 +53,7 @@ public class TransactionPractise {
 				connection.rollback();
 			
 			String sqlQuery3="Select * from accountmanagement";
-			ResultSet rs=statement.executeQuery(sqlQuery3);
+			 rs=statement.executeQuery(sqlQuery3);
 			
                   if(rs!=null) {
 				
@@ -73,6 +74,8 @@ public class TransactionPractise {
 		finally {
 			try {
 				PropertiesPractise.jdbcStopLeak(connection,  statement, resultSet);
+				PropertiesPractise.jdbcStopLeak(null, null, rs);
+				sc.close();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
